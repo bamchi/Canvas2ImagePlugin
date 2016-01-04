@@ -82,7 +82,7 @@ public class Canvas2ImagePlugin extends CordovaPlugin {
 			Log.i("Canvas2ImagePlugin", "Android version " + deviceVersion);
 			int check = deviceVersion.compareTo("2.3.3");
 
-			File folder = getDataDirectory();
+			File folder = Environment.getDataDirectory();
 			File imageFile = new File(folder, "sign.png");
 
 			FileOutputStream out = new FileOutputStream(imageFile);
