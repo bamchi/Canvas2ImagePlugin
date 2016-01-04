@@ -82,7 +82,23 @@ public class Canvas2ImagePlugin extends CordovaPlugin {
 			Log.i("Canvas2ImagePlugin", "Android version " + deviceVersion);
 			int check = deviceVersion.compareTo("2.3.3");
 
-			File folder = Environment.getDataDirectory();
+			File folder;
+			/*
+			 * File path = Environment.getExternalStoragePublicDirectory(
+			 * Environment.DIRECTORY_DOWNLOADS ); //this throws error in Android
+			 * 2.2
+			 */
+			if (check >= 1) {
+				folder = Environment
+					.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+
+				if(!folder.exists()) {
+					folder.mkdirs();
+				}
+			} else {
+				folder = Environment.getExternalStorageDirectory();
+			}
+
 			File imageFile = new File(folder, "sign.png");
 
 			FileOutputStream out = new FileOutputStream(imageFile);
